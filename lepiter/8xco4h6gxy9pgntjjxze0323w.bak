@@ -1,0 +1,218 @@
+{
+	"__schema" : "4.1",
+	"__type" : "page",
+	"children" : {
+		"__type" : "snippets",
+		"items" : [
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T12:57:16.336005+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T13:11:35.146752+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "zAOZ/ulfQGOJme9tz1ypSw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Getting to know the landscape is helpful to orient yourself, see potential problems and understand where to start improvements. In large organizations, there are often a lot of different repositories containing source code and configuration data.  The traditional way of doing this as a new developer through study of documentation, presentations by experienced team members and by doing small “good first issues” can be improved upon."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T13:00:04.115262+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T13:29:22.94923+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "x6fJY1a+StyGLwlqFLZiLA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Government Digital Services\nThe UK government is doing development in the open, and is a huge organization with lots of publicly available repositories. A number of them are relevant for handling payment, and an  interesting subset to look at might be:"
+			},
+			{
+				"__type" : "pharoSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T13:28:37.367051+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T13:28:41.977504+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "1sMg8XlORxKipeMyL/na2g=="
+				},
+				"code" : "repos := #('pay-connector' 'pay-adminusers' 'pay-publicauth' 'pay-ledger' 'pay-webhooks' 'pay-cardid' 'pay-products')."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T13:32:44.717971+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T13:33:19.593371+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "nyS+uAOgTxy7POdNfNhmew=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "These repositories are on GitHub and for exploring them, we can clone (download) them."
+			},
+			{
+				"__type" : "pharoSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T13:33:26.38517+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T13:40:56.183108+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "aA1mpK5JSku7n0RfPztNuQ=="
+				},
+				"code" : "loader := REXLoader root: (FileLocator home / 'repExp') repositories: repos .\rloader repositoryFormat: 'git@github.com:alphagov/{1}.git'."
+			}
+		]
+	},
+	"createEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"createTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2025-12-09T12:55:19.498055+01:00"
+		}
+	},
+	"editEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"editTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2025-12-09T12:55:31.765586+01:00"
+		}
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Repository Exploration"
+	},
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "6c954bd0-e52b-4cbf-a12d-d14ead41c796"
+	}
+}
