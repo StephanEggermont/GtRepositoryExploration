@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-12-09T13:11:35.146752+01:00"
+						"dateAndTimeString" : "2025-12-09T14:23:07.322092+01:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Getting to know the landscape is helpful to orient yourself, see potential problems and understand where to start improvements. In large organizations, there are often a lot of different repositories containing source code and configuration data.  The traditional way of doing this as a new developer through study of documentation, presentations by experienced team members and by doing small “good first issues” can be improved upon."
+				"string" : "Getting to know the landscape is helpful to orient ourselves, see potential problems and understand where to start improvements. In large organizations, there are often a lot of different repositories containing source code and configuration data.  The traditional way of doing this as a new developer through study of documentation, presentations by experienced team members and by doing small “good first issues” can be improved upon."
 			},
 			{
 				"__type" : "textSnippet",
@@ -137,7 +137,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-12-09T13:33:19.593371+01:00"
+						"dateAndTimeString" : "2025-12-09T14:27:42.872798+01:00"
 					}
 				},
 				"uid" : {
@@ -147,7 +147,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "These repositories are on GitHub and for exploring them, we can clone (download) them."
+				"string" : "These repositories are on GitHub and for exploring them, we can clone (download) them. If we need a lot of repositories, we might have to change this code to respect rate limits."
 			},
 			{
 				"__type" : "pharoSnippet",
@@ -174,14 +174,156 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-12-09T13:40:56.183108+01:00"
+						"dateAndTimeString" : "2025-12-09T13:59:42.98056+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
 					"uidString" : "aA1mpK5JSku7n0RfPztNuQ=="
 				},
-				"code" : "loader := REXLoader root: (FileLocator home / 'repExp') repositories: repos .\rloader repositoryFormat: 'git@github.com:alphagov/{1}.git'."
+				"code" : "loader := REXLoader root: (FileLocator home / 'repExp') repositories: repos .\rloader repositoryFormat: 'git@github.com:alphagov/{1}.git'.\rloader cloneAll"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T14:22:24.913357+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T14:24:21.05091+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "vxKZvxzFRC6dTkZFPyjSJw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "After having cloned them, updating them is done by pulling"
+			},
+			{
+				"__type" : "pharoSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T14:24:25.819239+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T14:24:31.584659+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "+m+USBAPQP2ITQicUEH3tw=="
+				},
+				"code" : "loader pullAll"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T14:29:07.364222+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T14:29:25.715462+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "jSsoQZoJQDeEAFHBVD0Wjw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Now we can create an overview of the code found."
+			},
+			{
+				"__type" : "pharoSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T14:29:42.358479+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-09T14:32:38.570983+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "CZFnYO1VRYGSzXl9Oyqblw=="
+				},
+				"code" : "overview := REXOverview on: loader root.\roverv"
 			}
 		]
 	},

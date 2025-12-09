@@ -31,6 +31,12 @@ REXLoader >> initialize [
 ]
 
 { #category : 'accessing' }
+REXLoader >> pullAll [
+	root directories do: [:gitRepo |
+		(PureGitRepository on: gitRepo) operations pull: #()]
+]
+
+{ #category : 'accessing' }
 REXLoader >> repos: aCollection [
 	repos := aCollection
 ]
@@ -38,6 +44,11 @@ REXLoader >> repos: aCollection [
 { #category : 'accessing' }
 REXLoader >> repositoryFormat: aString [ 
 	repositoryFormat := aString
+]
+
+{ #category : 'accessing' }
+REXLoader >> root [
+	^ root
 ]
 
 { #category : 'accessing' }
