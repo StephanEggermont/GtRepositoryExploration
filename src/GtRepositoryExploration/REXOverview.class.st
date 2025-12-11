@@ -18,6 +18,18 @@ REXOverview class >> on: aFileReference [
 		yourself
 ]
 
+{ #category : 'as yet unclassified' }
+REXOverview >> builder [
+	| builder |
+	builder := GtNestedTreeBuilder new
+			data: (root asFileReference allFiles
+					select: [ :each | self selectedExtensions includes: each extension ]);
+			groupBy: [ :aFile | (aFile relativeTo: root asFileReference) asPath segments first ];
+			weight: [ :aFile | aFile size max: 1000 ];
+			build.
+	^ {builder}
+]
+
 { #category : 'accessing' }
 REXOverview >> calculateExtensions [
 	| extensionsBag |
@@ -36,6 +48,26 @@ REXOverview >> calculateExtensions [
 { #category : 'as yet unclassified' }
 REXOverview >> changeSelectionOf: anExtension [ 
 	anExtension changeSelected
+]
+
+{ #category : 'as yet unclassified' }
+REXOverview >> colorForType: anObject [ 
+	^Color green
+]
+
+{ #category : 'as yet unclassified' }
+REXOverview >> containerContext: aNodeContext parent: anElement [
+	aNodeContext level = 2
+		ifTrue: [ anElement
+				addChild: (BrLabel new
+						text: aNodeContext model name;
+						aptitude: (BrGlamorousLabelAptitude new
+								fontSize: 12;
+								foreground: Color blue);
+						constraintsDo: [ :c | c ignoreByLayout ]) ].
+	anElement
+		border: (BlBorder paint: (Color gray alpha: 0.7 / aNodeContext level) width: 1).
+	^ anElement padding: (BlInsets all: 1)
 ]
 
 { #category : 'as yet unclassified' }
@@ -64,6 +96,46 @@ REXOverview >> gtExtensionsFor: aView [
 				checkbox ]
 ]
 
+{ #category : 'as yet unclassified' }
+REXOverview >> gtTsTreemapFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'TreeMap';
+		priority: 20;
+		object: [ self treeMap ];
+		view: #gtLiveFor:
+]
+
+{ #category : 'as yet unclassified' }
+REXOverview >> leafElementParent: anElement context: aLeafContext [
+	| isGtExample isTest |
+	isTest := aLeafContext model item name matches: '*test*'.
+	isGtExample := false.
+	anElement
+		border: (BlBorder paint: (Color gray alpha: 0.5 / aLeafContext level) width: 1);
+		when: BlClickEvent do: [ :aClickEvent |
+					(aClickEvent modifiers isPrimaryModifier "ctrl-click")
+					ifFalse: [aClickEvent consumed: true.
+						aClickEvent currentTarget phlow spawnObject: aLeafContext model item]].
+	  anElement addAptitude: (BrWithExplicitContextMenuAptitude new
+            stencil: [ | aMenu |
+                aMenu := BrMenuExplicit new.
+                aMenu
+                    stencil: [ BrVerticalPane new
+                            fitContent;
+                            padding: (BlInsets all: 15);
+                            addChild: (BlBasicExamples new circle asScalableElement size: 100 @ 100);
+                            when: BlClickEvent
+                                do: [ :aBlClickEvent | 
+                                    aBlClickEvent consumed: true.
+                                    aMenu hide ] ].
+                aMenu ]).
+	^ anElement
+		background: (isTest
+				ifTrue: [ Color yellow alpha: 0.4 ]
+				ifFalse: [ self colorForType: aLeafContext model item extension])
+]
+
 { #category : 'accessing' }
 REXOverview >> loadAll [
 	files := root allFiles.
@@ -73,4 +145,21 @@ REXOverview >> loadAll [
 { #category : 'accessing' }
 REXOverview >> root: aFileReference [ 
 	root := aFileReference
+]
+
+{ #category : 'as yet unclassified' }
+REXOverview >> selectedExtensions [
+	^extensions select: [:each | each selected] thenCollect: [:each | each key]
+]
+
+{ #category : 'as yet unclassified' }
+REXOverview >> treeMap [
+	<gtExample>
+	^ GtNestedRectangleTreeMap new
+		roots: self builder;
+		leaves: [ :aNode | aNode leaves ];
+		deep: [ :aNode | aNode nodes ];
+		leavesSize: [ :aNode | aNode weight ];
+		containerElement: [ :anElement :aNodeContext | self containerContext: aNodeContext parent: anElement ];
+		leafElement: [ :anElement :aLeafContext | self leafElementParent: anElement context: aLeafContext ]
 ]
