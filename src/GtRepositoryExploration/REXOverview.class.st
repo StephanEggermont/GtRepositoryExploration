@@ -4,7 +4,9 @@ Class {
 	#instVars : [
 		'root',
 		'files',
-		'extensions'
+		'extensions',
+		'colorMap',
+		'announcer'
 	],
 	#category : 'GtRepositoryExploration-Model',
 	#package : 'GtRepositoryExploration',
@@ -19,6 +21,11 @@ REXOverview class >> on: aFileReference [
 ]
 
 { #category : 'as yet unclassified' }
+REXOverview >> announcer [
+	^ announcer ifNil: [ announcer := Announcer new ]
+]
+
+{ #category : 'as yet unclassified' }
 REXOverview >> builder [
 	| builder |
 	builder := GtNestedTreeBuilder new
@@ -28,6 +35,13 @@ REXOverview >> builder [
 			weight: [ :aFile | aFile size max: 1000 ];
 			build.
 	^ {builder}
+]
+
+{ #category : 'as yet unclassified' }
+REXOverview >> calculateColors [
+	|wheel|
+	wheel := Color wheel: self selectedExtensions size.
+	colorMap := Dictionary newFromKeys: self selectedExtensions andValues: wheel.
 ]
 
 { #category : 'accessing' }
@@ -47,12 +61,14 @@ REXOverview >> calculateExtensions [
 
 { #category : 'as yet unclassified' }
 REXOverview >> changeSelectionOf: anExtension [ 
-	anExtension changeSelected
+	anExtension changeSelected.
+	self calculateColors.
+	self announcer announce: (REXUpdate new extension: anExtension).
 ]
 
 { #category : 'as yet unclassified' }
-REXOverview >> colorForType: anObject [ 
-	^Color green
+REXOverview >> colorForType: anObject [
+	^colorMap at: anObject ifAbsent: [Color red].
 ]
 
 { #category : 'as yet unclassified' }
@@ -103,7 +119,13 @@ REXOverview >> gtTsTreemapFor: aView [
 		title: 'TreeMap';
 		priority: 20;
 		object: [ self treeMap ];
+		updateWhen: REXUpdate in: [self announcer];
 		view: #gtLiveFor:
+]
+
+{ #category : 'as yet unclassified' }
+REXOverview >> initialize [
+	colorMap := Dictionary new.
 ]
 
 { #category : 'as yet unclassified' }
