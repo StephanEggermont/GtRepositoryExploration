@@ -350,7 +350,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2025-12-12T12:35:26.308682+01:00"
+						"dateAndTimeString" : "2025-12-12T13:27:49.882922+01:00"
 					}
 				},
 				"uid" : {
@@ -360,7 +360,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "In 'File extensions'  there is a tabular overview of all the file extensions that are used in the repositories, sorted by number of files. Here it is easy to identify ones that we are certainly n"
+				"string" : "In 'File extensions'  there is a tabular overview of all the file extensions that are used in the repositories, sorted by number of files. Here it is easy to identify ones that we are certainly not interested in.  Thereafter, we can switch to the Treemap view"
 			}
 		]
 	},
