@@ -6,7 +6,9 @@ Class {
 		'files',
 		'extensions',
 		'colorMap',
-		'announcer'
+		'announcer',
+		'pane',
+		'filterPane'
 	],
 	#category : 'GtRepositoryExploration-Model',
 	#package : 'GtRepositoryExploration',
@@ -30,7 +32,7 @@ REXOverview >> builder [
 	| builder |
 	builder := GtNestedTreeBuilder new
 			data: (root asFileReference allFiles
-					select: [ :each | self selectedExtensions includes: each extension ]);
+					select: [ :each | self visibleExtensions includes: each extension ]);
 			groupBy: [ :aFile | (aFile relativeTo: root asFileReference) asPath segments first ];
 			weight: [ :aFile | aFile size max: 1000 ];
 			build.
@@ -40,7 +42,7 @@ REXOverview >> builder [
 { #category : 'as yet unclassified' }
 REXOverview >> calculateColors [
 	|wheel|
-	wheel := Color wheel: self selectedExtensions size.
+	wheel := (Color wheel: self selectedExtensions size) collect: [:each | each alpha: 0.4].
 	colorMap := Dictionary newFromKeys: self selectedExtensions andValues: wheel.
 ]
 
@@ -63,6 +65,10 @@ REXOverview >> calculateExtensions [
 REXOverview >> changeSelectionOf: anExtension [ 
 	anExtension changeSelected.
 	self calculateColors.
+	filterPane ifNotNil: [filterPane choices: self selectedExtensions].
+		pane ifNotNil: [
+			pane children second removeFromParent.
+			pane addChild: self treeMap asElement].
 	self announcer announce: (REXUpdate new extension: anExtension).
 ]
 
@@ -92,6 +98,15 @@ REXOverview >> extensions [
 ]
 
 { #category : 'as yet unclassified' }
+REXOverview >> filterPane [
+	filterPane ifNil: [filterPane := REXFilterPane new
+		announcer: self announcer
+		yourself].
+	filterPane choices: self selectedExtensions.
+	^filterPane
+]
+
+{ #category : 'as yet unclassified' }
 REXOverview >> gtExtensionsFor: aView [
 	<gtView>
 	^aView columnedList
@@ -100,6 +115,7 @@ REXOverview >> gtExtensionsFor: aView [
 		items: [self extensions];
 		column: 'Type' text: #key;
 		column: '#' text: #number;
+		column: 'Visible' text: #visible;
 		column: 'Include'
 			stencil: [ :anExtension | 
 				| checkbox |
@@ -118,7 +134,7 @@ REXOverview >> gtTsTreemapFor: aView [
 	^ aView forward
 		title: 'TreeMap';
 		priority: 20;
-		object: [ self treeMap ];
+		object: [ self pane ];
 		updateWhen: REXUpdate in: [self announcer];
 		view: #gtLiveFor:
 ]
@@ -126,6 +142,7 @@ REXOverview >> gtTsTreemapFor: aView [
 { #category : 'as yet unclassified' }
 REXOverview >> initialize [
 	colorMap := Dictionary new.
+	self announcer when: REXUpdate send: #update: to: self
 ]
 
 { #category : 'as yet unclassified' }
@@ -164,6 +181,15 @@ REXOverview >> loadAll [
 	self calculateExtensions
 ]
 
+{ #category : 'as yet unclassified' }
+REXOverview >> pane [
+	pane ifNil: [pane := BrVerticalPane new
+		matchParent;
+		addChild: self filterPane;
+		addChild: self treeMap asElement].
+	^pane
+]
+
 { #category : 'accessing' }
 REXOverview >> root: aFileReference [ 
 	root := aFileReference
@@ -184,4 +210,19 @@ REXOverview >> treeMap [
 		leavesSize: [ :aNode | aNode weight ];
 		containerElement: [ :anElement :aNodeContext | self containerContext: aNodeContext parent: anElement ];
 		leafElement: [ :anElement :aLeafContext | self leafElementParent: anElement context: aLeafContext ]
+]
+
+{ #category : 'as yet unclassified' }
+REXOverview >> update: anUpdateEvent [
+	anUpdateEvent visible ifNotNil: [ |ext|
+		ext := extensions detect: [:e | e key = anUpdateEvent visible] . 
+		ext visible: ext visible not.
+		pane ifNotNil: [
+			pane children second removeFromParent.
+			pane addChild: self treeMap asElement]]
+]
+
+{ #category : 'as yet unclassified' }
+REXOverview >> visibleExtensions [
+	^extensions select: [:each | (each selected) and: (each visible = true)] thenCollect: [:each | each key]
 ]

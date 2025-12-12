@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'key',
 		'number',
-		'selected'
+		'selected',
+		'visible'
 	],
 	#category : 'GtRepositoryExploration-Model',
 	#package : 'GtRepositoryExploration',
@@ -17,6 +18,7 @@ REXExtension class >> key: anObject number: aNumber selected: aBoolean [
 		key: anObject;
 		number: aNumber;
 		selected: aBoolean;
+		visible: true;
 		yourself
 ]
 
@@ -53,4 +55,14 @@ REXExtension >> selected [
 { #category : 'accessing' }
 REXExtension >> selected: anObject [
 	selected := anObject
+]
+
+{ #category : 'accessing' }
+REXExtension >> visible [
+	^ visible
+]
+
+{ #category : 'accessing' }
+REXExtension >> visible: anObject [
+	visible := anObject
 ]
