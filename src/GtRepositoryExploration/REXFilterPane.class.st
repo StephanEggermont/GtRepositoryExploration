@@ -56,8 +56,8 @@ REXFilterPane >> uncheckedBackground [
 REXFilterPane >> updateChoices [
 	self removeChildren.
 	choices
-		do: [ :name | 
-			| checkbox aLabel aShape aLook |
+		do: [ :extension | 
+			| checkbox aLabel aShape aLook iconLook |
 			aLabel := BrGlamorousLabelAptitude new.
 			aShape := BrGlamorousButtonRectangularAptitude new.
 
@@ -66,19 +66,23 @@ REXFilterPane >> updateChoices [
 					checked: [ :aWidget | 
 						aWidget background: self checkedBackground.
 						aLabel
-							text: name;
+							text: extension key;
 							foreground: Color black;
 							bold ];
 					unchecked: [ :aWidget | 
 						aWidget background: self uncheckedBackground.
 						aLabel
-							text: name;
+							text: extension key;
 							foreground: Color black;
 							regular ].
-
-			checkbox := BrCheckbox new aptitude: aLook + aLabel + aShape.
+			iconLook := iconLook := BrIconAptitude new
+						icon: (BlElement new
+								size: 10 @ 10;
+								geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
+								background: extension color).
+			checkbox := BrCheckbox new aptitude: aLook + aLabel + aShape + iconLook.
 			checkbox check.
-			checkbox whenCheckedDo: [self click: name].
-			checkbox whenUncheckedDo: [self click: name].
+			checkbox whenCheckedDo: [ self click: extension key ].
+			checkbox whenUncheckedDo: [ self click: extension key ].
 			self addChild: checkbox ]
 ]

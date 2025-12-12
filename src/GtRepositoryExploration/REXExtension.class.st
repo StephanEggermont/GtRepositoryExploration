@@ -5,7 +5,8 @@ Class {
 		'key',
 		'number',
 		'selected',
-		'visible'
+		'visible',
+		'color'
 	],
 	#category : 'GtRepositoryExploration-Model',
 	#package : 'GtRepositoryExploration',
@@ -25,6 +26,16 @@ REXExtension class >> key: anObject number: aNumber selected: aBoolean [
 { #category : 'as yet unclassified' }
 REXExtension >> changeSelected [
 	selected := selected not
+]
+
+{ #category : 'accessing' }
+REXExtension >> color [
+	^ color ifNil: [Color white]
+]
+
+{ #category : 'accessing' }
+REXExtension >> color: anObject [
+	color := anObject
 ]
 
 { #category : 'accessing' }

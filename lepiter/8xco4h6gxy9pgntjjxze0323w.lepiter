@@ -324,6 +324,43 @@
 					"uidString" : "CZFnYO1VRYGSzXl9Oyqblw=="
 				},
 				"code" : "overview := REXOverview on: loader root.\roverview loadAll"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-12T12:33:39.507791+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2025-12-12T12:35:30.453095+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "20JqUnL2QLOW8OXZ6TEZkA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "In 'File extensions'  there is a tabular overview of all the file extensions that are used in the repositories, sorted by number of files. Here it is easy to identify ones that we are certainly not interested in."
 			}
 		]
 	},

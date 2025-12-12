@@ -43,7 +43,10 @@ REXOverview >> builder [
 REXOverview >> calculateColors [
 	|wheel|
 	wheel := (Color wheel: self selectedExtensions size) collect: [:each | each alpha: 0.4].
-	colorMap := Dictionary newFromKeys: self selectedExtensions andValues: wheel.
+	colorMap := Dictionary newFromKeys: (self selectedExtensions collect: [:ext | ext key]) andValues: wheel.
+	extensions do: [:ext | 
+		colorMap at: ext key ifPresent: [:found | ext color: found ] 
+			ifAbsent: [ext color: Color white]]
 ]
 
 { #category : 'accessing' }
@@ -116,6 +119,12 @@ REXOverview >> gtExtensionsFor: aView [
 		column: 'Type' text: #key;
 		column: '#' text: #number;
 		column: 'Visible' text: #visible;
+		column: 'Color' stencil: [ :anExtension |
+			BlElement new 
+				size: 12@12;
+				geometry: (BlRoundedRectangleGeometry cornerRadius: 3);
+				background: anExtension color];
+		updateWhen: REXUpdate in: [self announcer];
 		column: 'Include'
 			stencil: [ :anExtension | 
 				| checkbox |
@@ -197,7 +206,7 @@ REXOverview >> root: aFileReference [
 
 { #category : 'as yet unclassified' }
 REXOverview >> selectedExtensions [
-	^extensions select: [:each | each selected] thenCollect: [:each | each key]
+	^extensions select: [:each | each selected] 
 ]
 
 { #category : 'as yet unclassified' }
