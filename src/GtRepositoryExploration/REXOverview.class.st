@@ -101,6 +101,33 @@ REXOverview >> extensions [
 ]
 
 { #category : 'as yet unclassified' }
+REXOverview >> fileDetailsElementFor: aFileReference [ 
+	^(BrLabel new
+						text: (aFileReference contents size asString), ' bytes';
+						aptitude: (BrGlamorousLabelAptitude new
+								fontSize: 12;
+								foreground: Color blue))
+]
+
+{ #category : 'as yet unclassified' }
+REXOverview >> fileLinesElementFor: aFileReference [ 
+	^(BrLabel new
+						text: (aFileReference contents lines size asString), ' lines';
+						aptitude: (BrGlamorousLabelAptitude new
+								fontSize: 12;
+								foreground: Color blue))
+]
+
+{ #category : 'as yet unclassified' }
+REXOverview >> fileNameElementFor: aFileReference [ 
+	^(BrLabel new
+						text: (aFileReference relativeTo: root) pathString;
+						aptitude: (BrGlamorousLabelAptitude new
+								fontSize: 12;
+								foreground: Color black))
+]
+
+{ #category : 'as yet unclassified' }
 REXOverview >> filterPane [
 	filterPane ifNil: [filterPane := REXFilterPane new
 		announcer: self announcer
@@ -174,7 +201,9 @@ REXOverview >> leafElementParent: anElement context: aLeafContext [
                     stencil: [ BrVerticalPane new
                             fitContent;
                             padding: (BlInsets all: 15);
-                            addChild: (BlBasicExamples new circle asScalableElement size: 100 @ 100);
+                            addChild: (self fileNameElementFor: aLeafContext model item);
+                            addChild: (self fileLinesElementFor: aLeafContext model item);
+                            addChild: (self fileDetailsElementFor: aLeafContext model item);
                             when: BlClickEvent
                                 do: [ :aBlClickEvent | 
                                     aBlClickEvent consumed: true.
