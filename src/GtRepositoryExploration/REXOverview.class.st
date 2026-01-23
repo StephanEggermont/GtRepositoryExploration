@@ -134,7 +134,9 @@ REXOverview >> gtExtensionsFor: aView [
 					action: [ :aButton :aTab | 
 						self changeSelectionOf: anExtension.
 						checkbox phlow fireViewUpdateWish ].
-				checkbox ]
+				checkbox ];
+		actionButtonIcon: BrGlamorousVectorIcons refresh tooltip: 'Switch all' action: [self switchAll]
+
 ]
 
 { #category : 'as yet unclassified' }
@@ -207,6 +209,11 @@ REXOverview >> root: aFileReference [
 { #category : 'as yet unclassified' }
 REXOverview >> selectedExtensions [
 	^extensions select: [:each | each selected] 
+]
+
+{ #category : 'as yet unclassified' }
+REXOverview >> switchAll [
+	extensions do: [:ext | self changeSelectionOf: ext]
 ]
 
 { #category : 'as yet unclassified' }
