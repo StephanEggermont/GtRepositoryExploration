@@ -8,7 +8,9 @@ Class {
 		'colorMap',
 		'announcer',
 		'pane',
-		'filterPane'
+		'filterPane',
+		'maxHeight',
+		'maxWidth'
 	],
 	#category : 'GtRepositoryExploration-Model',
 	#package : 'GtRepositoryExploration',
@@ -96,6 +98,30 @@ REXOverview >> containerContext: aNodeContext parent: anElement [
 ]
 
 { #category : 'as yet unclassified' }
+REXOverview >> createForm: source [
+	|sourceForm height width|
+	height := source lines size.
+	height = 0 ifTrue: [width := 0]
+	ifFalse: [
+		width := source lines max: [:line | line size]].
+	height > maxHeight ifTrue: [height := maxHeight].
+	width > maxWidth ifTrue: [width := maxWidth].
+	sourceForm := Form extent: (width+1)@(height+1) depth: 32.
+	source lines withIndexDo: [:line :y |
+		line withIndexDo: [:ch :x |
+			(x < maxWidth) & (y<maxHeight) ifTrue: [
+			(#($( $) $[ $] ${ $}) includes: ch)ifTrue:
+				[sourceForm colorAt: x@y put: Color orange].
+			ch isLetter ifTrue: [
+				sourceForm colorAt: x@y put: Color blue].
+			ch isDigit ifTrue: [
+				sourceForm colorAt: x@y put: Color green]
+			] ifFalse: [ sourceForm colorAt: (x min:maxWidth)@(y min:maxHeight) put: Color red].
+			]].
+	^sourceForm
+]
+
+{ #category : 'as yet unclassified' }
 REXOverview >> extensions [
 	^extensions
 ]
@@ -119,6 +145,14 @@ REXOverview >> fileLinesElementFor: aFileReference [
 ]
 
 { #category : 'as yet unclassified' }
+REXOverview >> fileMicroPrintElementFor: aFileReference [ 
+	|enc|
+	enc := self findEncodingFor: aFileReference.
+	^(self createForm: (aFileReference readStreamEncoded: enc do: [:stream | stream contents])) asElement
+
+]
+
+{ #category : 'as yet unclassified' }
 REXOverview >> fileNameElementFor: aFileReference [ 
 	^(BrLabel new
 						text: (aFileReference relativeTo: root) pathString;
@@ -134,6 +168,14 @@ REXOverview >> filterPane [
 		yourself].
 	filterPane choices: self selectedExtensions.
 	^filterPane
+]
+
+{ #category : 'as yet unclassified' }
+REXOverview >> findEncodingFor: aFileReference [
+	^[aFileReference binaryReadStreamDo: [ :in | 
+		(ZnCharacterEncoder detectEncoding: in upToEnd) identifier ]] 
+		on: ZnCharacterEncodingError
+		do: [ :ex | ex return: 'utf-8' ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -180,7 +222,9 @@ REXOverview >> gtTsTreemapFor: aView [
 { #category : 'as yet unclassified' }
 REXOverview >> initialize [
 	colorMap := Dictionary new.
-	self announcer when: REXUpdate send: #update: to: self
+	self announcer when: REXUpdate send: #update: to: self.
+	maxWidth := 200.
+	maxHeight := 2000.
 ]
 
 { #category : 'as yet unclassified' }
@@ -204,6 +248,7 @@ REXOverview >> leafElementParent: anElement context: aLeafContext [
                             addChild: (self fileNameElementFor: aLeafContext model item);
                             addChild: (self fileLinesElementFor: aLeafContext model item);
                             addChild: (self fileDetailsElementFor: aLeafContext model item);
+                            addChild: (self fileMicroPrintElementFor: aLeafContext model item);
                             when: BlClickEvent
                                 do: [ :aBlClickEvent | 
                                     aBlClickEvent consumed: true.
