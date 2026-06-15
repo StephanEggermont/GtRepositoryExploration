@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'root',
 		'repos',
-		'repositoryFormat'
+		'repositoryFormat',
+		'default'
 	],
 	#category : 'GtRepositoryExploration-Model',
 	#package : 'GtRepositoryExploration',
@@ -21,8 +22,29 @@ REXLoader class >> root: aFileReference repositories: repos [
 
 { #category : 'accessing' }
 REXLoader >> cloneAll [
-	repos do: [:repoString |
-		(PureGitUrl with: (repositoryFormat format: {repoString})) cloneIn: root]
+	repos
+		do: [ :repoString | (PureGitUrl with: (self formatted: repoString)) cloneIn: root ]
+]
+
+{ #category : 'accessing' }
+REXLoader >> default [
+	^ default
+]
+
+{ #category : 'accessing' }
+REXLoader >> default: anObject [
+	default := anObject
+]
+
+{ #category : 'accessing' }
+REXLoader >> formatted: repoString [
+	|parts|
+	default ifNil: [^ repositoryFormat format: {repoString}].
+	parts := $/ split: repoString.
+	(parts size = 1) ifTrue: [
+		^repositoryFormat format: {default. repoString}] 
+	ifFalse:[
+			^repositoryFormat format: {parts first. parts second}]
 ]
 
 { #category : 'as yet unclassified' }
